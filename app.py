@@ -44,7 +44,7 @@ pages = st.sidebar.radio(
 # PAGE 1 — PROJECT OVERVIEW
 # =========================
 if pages == "Project Overview":
-    st.title("Bank Customer Churn Analysis")
+    st.title("💳 Bank Customer Churn Analysis")
 
     st.markdown(
     """
@@ -133,11 +133,11 @@ if pages == "Project Overview":
     })
     
     with col1:
-        st.markdown("### Dataset Overview")
+        st.markdown("### 📊 Dataset Overview")
         st.dataframe(dataset_overview, use_container_width=True)
 
     with col2:
-        st.markdown("### Key Feature Highlight")
+        st.markdown("### 💡 Key Feature Highlight")
 
         st.markdown("""
         <div style="text-align: justify;">
@@ -166,7 +166,7 @@ if pages == "Project Overview":
 # PAGE 2 — EDA (PLACEHOLDER)
 # =========================
 elif pages == "Exploratory Data Analysis":
-    st.title("Exploratory Data Analysis")
+    st.title("🔍 Exploratory Data Analysis")
     st.markdown("======")
     
     #AGE GROUPING
@@ -226,6 +226,7 @@ elif pages == "Exploratory Data Analysis":
         x='attrition_flag',
         y='count',
         color='attrition_flag',
+        color_discrete_sequence=px.colors.qualitative.Set2,
         text='count')
 
     fig_bar.update_layout(hovermode=False, showlegend=False,font=dict(size=16),width=400,height=460)
@@ -242,6 +243,7 @@ elif pages == "Exploratory Data Analysis":
         churn_counts,
         names='attrition_flag',
         values='count',
+        color_discrete_sequence=px.colors.qualitative.Set2,
         hole=0.4
     )
 
@@ -264,6 +266,7 @@ elif pages == "Exploratory Data Analysis":
     color='attrition_flag',
     barmode='group',
     text_auto=True,
+    color_discrete_sequence=px.colors.qualitative.Set2,
     category_orders={
         'age_group': labels
     }
@@ -273,6 +276,8 @@ elif pages == "Exploratory Data Analysis":
                          legend=dict( font=dict(size=14)),
                         height=400,margin=dict(t=20, b=20),showlegend=False)
     
+    fig_age.update_traces(textangle=0,  textposition='outside')
+
     fig_age.update_xaxes(
     showticklabels=False,  
     title_text=None        
@@ -287,12 +292,13 @@ elif pages == "Exploratory Data Analysis":
     y='education_level',
     color='attrition_flag',
     barmode='group',
+    color_discrete_sequence=px.colors.qualitative.Set2,
     text_auto=True,
     )
     fig_edu.update_layout(hovermode=False,font=dict(size=18),
                          legend=dict( font=dict(size=14)),
                         height=400,margin=dict(t=10, b=10),showlegend=False)
-    fig_edu.update_traces(textangle=0)
+    fig_edu.update_traces(textangle=0,  textposition='outside')
 
     fig_edu.update_xaxes(
     showticklabels=False,  
@@ -308,11 +314,14 @@ elif pages == "Exploratory Data Analysis":
     y='income_category',
     color='attrition_flag',
     barmode='group',
+    color_discrete_sequence=px.colors.qualitative.Set2,
     text_auto=True,
     )
     fig_income.update_layout(hovermode=False,font=dict(size=18),
                          legend=dict( font=dict(size=14)),
                         height=400,margin=dict(t=10, b=10),showlegend=False)
+
+    fig_income.update_traces(textangle=0,  textposition='outside')
 
     fig_income.update_xaxes(
     showticklabels=False,  
@@ -328,10 +337,13 @@ elif pages == "Exploratory Data Analysis":
     y='gender',
     color='attrition_flag',
     barmode='group',
+    color_discrete_sequence=px.colors.qualitative.Set2,
     text_auto=True    )
     fig_gender.update_layout(hovermode=False,font=dict(size=18),
                          legend=dict( font=dict(size=14)),
                         height=400,margin=dict(t=20, b=20),showlegend=False)
+
+    fig_gender.update_traces(textangle=0,  textposition='outside')
 
     fig_gender.update_xaxes(
     showticklabels=False,  
@@ -369,7 +381,11 @@ elif pages == "Exploratory Data Analysis":
         color='attrition_flag',
         barmode='group',
         text='percentage_label',
-        category_orders={'age_group': labels}
+        color_discrete_sequence=px.colors.qualitative.Set2,
+        category_orders={
+        'attrition_flag': ['Existing Customer', 'Attrited Customer'],
+        'age_group': labels}
+
     )
 
     fig_age_rate.update_layout(
@@ -377,6 +393,8 @@ elif pages == "Exploratory Data Analysis":
                          legend=dict( font=dict(size=14)),
                         height=400,margin=dict(t=20, b=20),showlegend=False
     )
+    fig_age_rate.update_traces(textangle=0,  textposition='outside')
+
     fig_age_rate.update_xaxes(
     showticklabels=False,  
     title_text=None        
@@ -393,7 +411,11 @@ elif pages == "Exploratory Data Analysis":
         x='percentage',
         color='attrition_flag',
         barmode='group',
-        text='percentage_label' )
+        text='percentage_label',
+        color_discrete_sequence=px.colors.qualitative.Set2,
+        category_orders={
+        'attrition_flag': ['Existing Customer', 'Attrited Customer'],
+        'age_group': labels})
 
     fig_edu_rate.update_layout(
         uniformtext_minsize=14,
@@ -401,6 +423,8 @@ elif pages == "Exploratory Data Analysis":
                          legend=dict( font=dict(size=14)),
                         height=400,margin=dict(t=10, b=10),showlegend=False
     )
+    fig_edu_rate.update_traces(textangle=0,  textposition='outside')
+
     fig_edu_rate.update_xaxes(
     showticklabels=False,  
     title_text=None        
@@ -419,6 +443,10 @@ elif pages == "Exploratory Data Analysis":
         color='attrition_flag',
         barmode='group',
         text='percentage_label',
+        color_discrete_sequence=px.colors.qualitative.Set2,
+        category_orders={
+        'attrition_flag': ['Existing Customer', 'Attrited Customer'],
+        'age_group': labels}
     )
 
     fig_income_rate.update_layout(
@@ -427,6 +455,8 @@ elif pages == "Exploratory Data Analysis":
                          legend=dict( font=dict(size=14)),
                         height=400,margin=dict(t=10, b=10),showlegend=False
     )
+
+    fig_income_rate.update_traces(textangle=0,  textposition='outside')
 
     fig_income_rate.update_xaxes(
     showticklabels=False,  
@@ -445,7 +475,11 @@ elif pages == "Exploratory Data Analysis":
         x='percentage',
         color='attrition_flag',
         barmode='group',
-        text='percentage_label'    )
+        text='percentage_label',
+        color_discrete_sequence=px.colors.qualitative.Set2,
+        category_orders={
+        'attrition_flag': ['Existing Customer', 'Attrited Customer'],
+        'age_group': labels})
 
     fig_gender_rate.update_layout(
         uniformtext_minsize=12,
@@ -454,6 +488,8 @@ elif pages == "Exploratory Data Analysis":
                          legend=dict( font=dict(size=14)),
                         height=400,margin=dict(t=20, b=20),showlegend=False
     )
+    fig_gender_rate.update_traces(textangle=0,  textposition='outside')
+
     fig_gender_rate.update_xaxes(
     showticklabels=False,  
     title_text=None        
@@ -464,14 +500,14 @@ elif pages == "Exploratory Data Analysis":
     )
 
     with col1:
-        st.markdown("### Churn Distribution Count")
+        st.markdown("### 📊 Churn Distribution Count")
         with st.container(border=True):
             st.plotly_chart(fig_bar, use_container_width=True)
-        st.markdown("### Churn Distribution Proportion")
+        st.markdown("### 📊 Churn Distribution Proportion")
         with st.container(border=True):
             st.plotly_chart(fig_pie, use_container_width=True)
     with col2:
-        st.markdown("### Customer Demographics Overview")
+        st.markdown("### 📈 Customer Demographics Overview")
         tab1, tab2, tab3,tab4 = st.tabs(["Churn vs Age Group", "Churn vs Education Level", "Churn vs Income Category", "Churn vs Gender"])
         with tab1:
             with st.container(border=True):
@@ -484,24 +520,24 @@ elif pages == "Exploratory Data Analysis":
                  st.plotly_chart(fig_income, use_container_width=True)
         with tab4:
             with st.container(border=True):
-                 st.plotly_chart(fig_gender, use_container_width=False)
+                 st.plotly_chart(fig_gender, use_container_width=True)
         
-        st.markdown("### Churn Rate by Demographics")
+        st.markdown("### 📈 Churn Rate by Demographics")
         tab1, tab2, tab3,tab4 = st.tabs(["Churn Rate by Age Group", "Churn Rate by Education Level", "Churn Rate by Income Category", "Churn Rate by Gender"])
         with tab1:
             with st.container(border=True):
-                st.plotly_chart(fig_age_rate, use_container_width=False)
+                st.plotly_chart(fig_age_rate, use_container_width=True)
         with tab2:
             with st.container(border=True):
-                st.plotly_chart(fig_edu_rate, use_container_width=False)
+                st.plotly_chart(fig_edu_rate, use_container_width=True)
         with tab3:
             with st.container(border=True):
-                 st.plotly_chart(fig_income_rate, use_container_width=False)
+                 st.plotly_chart(fig_income_rate, use_container_width=True)
         with tab4:
             with st.container(border=True):
-                 st.plotly_chart(fig_gender_rate, use_container_width=False)
+                 st.plotly_chart(fig_gender_rate, use_container_width=True)
     
-    st.subheader("Key Insights from Demographic Analysis")
+    st.subheader("💡 Key Insights from Demographic Analysis")
 
     st.markdown(
     """
@@ -525,7 +561,7 @@ elif pages == "Exploratory Data Analysis":
 # PAGE 3 — MODELING (PLACEHOLDER)
 # =========================
 elif pages == "Churn Prediction Model":
-    st.title("Churn Prediction Model")
+    st.title("💻 Churn Prediction Model")
     st.info("TBA.")
     st.image("assets/miku question mark", width=200)
 
@@ -534,7 +570,7 @@ elif pages == "Churn Prediction Model":
 # PAGE 4 — EVALUATION (PLACEHOLDER)
 # =========================
 elif pages == "Model Evaluation":
-    st.title("Model Evaluation")
+    st.title("📋 Model Evaluation")
     st.info("TBA.")
     st.image("assets/miku question mark", width=200)
 
@@ -543,7 +579,7 @@ elif pages == "Model Evaluation":
 # PAGE 5 — INSIGHT
 # =========================
 elif pages == "Insight & Recommendation":
-    st.title("Insight & Recommendation")
+    st.title("💡 Insight & Recommendation")
     st.info("TBA.")
     st.image("assets/miku question mark", width=200)
 
